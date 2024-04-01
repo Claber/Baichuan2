@@ -119,7 +119,7 @@ def train():
     tokenizer = transformers.AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
         use_fast=False,
-        trust_remote_code=True,
+        trust_remote_code=False,
         model_max_length=training_args.model_max_length,
         cache_dir=training_args.cache_dir,
     )
