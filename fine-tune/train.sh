@@ -1,4 +1,4 @@
-model_dir="baichuan-inc/"
+model_dir="../../"
 model_name="Baichuan2-13B-Chat"
 model_output_dir="output"
 when_start=`date "+%Y-%m-%d-%H-%M-%S"`
