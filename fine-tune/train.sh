@@ -6,7 +6,7 @@ when_start=`date "+%Y-%m-%d-%H-%M-%S"`
 train_data_path="data/belle_chat_ramdon_10k.json"
 
 #note that CUDA_VISIBLE_DEVICES can’t be used with DeepSpeed to control which devices should be used.
-use_devices="1,2"
+use_devices="4,5,6,7"
 
 echo "Finetuning model = "$model_name", with data = "${train_data_path}", at "${when_start}
 echo "target dir = ["{$model_output_dir}"/"${when_start}
@@ -30,9 +30,8 @@ fi
 
 # sinlge host with multiple GPUs
 hostfile=""
-deepspeed --hostfile=$hostfile fine-tune.py  \
+deepspeed --hostfile=$hostfile --include="localhost:"${use_devices}  fine-tune.py  \
     --report_to "none" \
-    --include="localhost:"${use_devices} \
     --data_path ${train_data_path} \
     --model_name_or_path ${model_dir}${model_name} \
     --output_dir ${model_output_dir} \
